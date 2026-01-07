@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>task_manager</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>Task Manager App</h1>
+    </header>
+    <main>
+      <div class="container">
+        <section class="left-side">
+          <h2>Todo Form</h2>
+          <p id="errorMsg">hi</p>
+          <form>
+            <div class="form-group">
+              <label for="todoTitle">Title:</label>
+              <input type="text" id="todoTitle" placeholder="todo title" />
+            </div>
+            <div class="form-group">
+              <label for="todoDesc">Description: </label>
+              <input
+                type="text"
+                id="todoDesc"
+                placeholder="todo description "
+              />
+            </div>
+            <div class="button-group">
+              <button id="resetForm" class="btn">Reset</button>
+              <button id="submitBtn" class="btn">Add</button>
+            </div>
+          </form>
+        </section>
+        <section class="right-side">
+          <h2>Todo Lists</h2>
+          <ul class="list-container" id="todoList">
+            <li class="list-item">
+              <span><input type="checkbox" id="taskCheck" /></span>
+              <p>title</p>
+              <div class="btn-content">
+                <button id="editTask" class="btn">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button id="deleteTask" class="btn">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
