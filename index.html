@@ -1,65 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>task_manager</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-  </head>
-  <body>
-    <header>
-      <h1>Task Manager App</h1>
-    </header>
-    <main>
-      <div class="container">
-        <section class="left-side">
-          <h2>Todo Form</h2>
-          <p id="errorMsg">hi</p>
-          <form>
-            <div class="form-group">
-              <label for="todoTitle">Title:</label>
-              <input type="text" id="todoTitle" placeholder="todo title" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todoify App</title>
+  <!-- fontawasome -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <!-- header -->
+<header class="bg-primary py-3 text-center">
+  <h1 class="text-white"><i class="fa-solid fa-clipboard-list"></i> Todoify</h1>
+</header>
+<!-- main -->
+ <main class="py-5">
+   <div class="container bg-white todo-container shadow-sm rounded p-3">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-6 p-2 pe-md-4 border-end">
+        <h3 class="text-primary mb-3">Todo Form</h3>
+         <form id="todoForm" class="needs-validation" novalidate>
+           <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="inputFormTitle" placeholder="Todo Title" required>
+            <label for="inputFormTitle">Todo Title</label>
+            <div class="invalid-feedback">
+              Please enter a title for your todo.
             </div>
-            <div class="form-group">
-              <label for="todoDesc">Description: </label>
-              <input
-                type="text"
-                id="todoDesc"
-                placeholder="todo description "
-              />
+          </div>
+          <div class="form-floating mb-3">
+            <textarea class="form-control" id="inputFormDesc" placeholder="Todo Description" style="height: 100px;" required></textarea>
+            <label for="inputFormDesc">Todo Description</label>
+            <div class="invalid-feedback">
+              Please enter a description.
             </div>
-            <div class="button-group">
-              <button id="resetForm" class="btn">Reset</button>
-              <button id="submitBtn" class="btn">Add</button>
-            </div>
-          </form>
-        </section>
-        <section class="right-side">
-          <h2>Todo Lists</h2>
-          <ul class="list-container" id="todoList">
-            <li class="list-item">
-              <span><input type="checkbox" id="taskCheck" /></span>
-              <p>title</p>
-              <div class="btn-content">
-                <button id="editTask" class="btn">
-                  <i class="fa-solid fa-pen-to-square"></i>
-                </button>
-                <button id="deleteTask" class="btn">
-                  <i class="fa-solid fa-trash"></i>
-                </button>
-              </div>
-            </li>
-          </ul>
-        </section>
+          </div>
+           <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-success">Add Todo</button>
+            <button type="reset" class="btn btn-warning">Reset Form</button>
+          </div>
+        </form>
       </div>
-    </main>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+      <div class="col-md-6 p-2 ps-md-4">
+        <h3 class="text-primary">Todo List</h3>
+        <ul class="list-group" id="todoList">
+          <li class="list-group-item d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+             <input class="form-check-input me-3" type="checkbox">
+             <span class="fw-medium">Finish Bootstrap layout</span>
+            </div>
+            <div class="d-flex">
+              <button class="btn btn-sm btn-outline-primary me-2">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+              <button class="btn btn-sm btn-outline-warning">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>    
+            </div>
+          </li>
+         </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+<script type="module"  src="./src/main.js"></script>
+</body>
 </html>

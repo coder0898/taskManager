@@ -1,49 +1,56 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
 
-// form
-const todoTitle = document.getElementById("todoTitle");
-const todoDesc = document.getElementById("todoDesc");
-const errorMsg = document.getElementById("errorMsg");
-const resetForm = document.getElementById("resetForm");
-const submitBtn = document.getElementById("submitBtn");
+// DOM elements
+const todoForm = document.getElementById("todoForm")
+const inputFormTitle = document.getElementById('inputFormTitle');
+const inputFormDesc = document.getElementById('inputFormDesc');
 
-let taskCollection = JSON.parse(localStorage.getItem("taskCollection")) || [];
+let todoItemList = JSON.parse(localStorage.getItem('Todos'))||[]
 
-function submitTask() {
-  let title = todoTitle.value.trim();
-  let desc = todoDesc.value.trim();
-
-  if (!title || !desc) {
-    errorMsg.innerText = "Please filled the details";
-    errorMsg.style.display = "block";
-    return;
-  }
-
-  let singleTask = {
-    id: Date.now(),
-    title,
-    desc,
-  };
-
-  taskCollection.push(singleTask);
-  localStorage.setItem("taskCollection", JSON.stringify(taskCollection));
-  console.log("task added successfully");
-  console.log("the task added is", taskCollection);
-  ClearForm();
+//save to localstorage
+function SaveData(data) {
+    localStorage.setItem('Todos',JSON.stringify(data));
 }
 
-function ClearForm() {
-  todoTitle.value = "";
-  todoDesc.value = "";
-  errorMsg.innerText = "";
+// add todo functionality
+function submitTodoItem(e) {
+    e.preventDefault();
+
+    // validation
+     if (!todoForm.checkValidity()) {
+      e.stopPropagation();
+      todoForm.classList.add('was-validated');
+      return;
+    }
+
+    let title = inputFormTitle.value.trim();
+    let desc = inputFormDesc.value.trim();
+
+    let newTodoItem = {
+        id:Date.now(),
+        title,
+        description:desc,
+        isComplete:false
+    };
+
+    todoItemList.push(newTodoItem)
+    console.log('Todo Added:', todoItemList);
+    SaveData(todoItemList);
+
+    todoForm.reset();
+    todoForm.classList.remove('was-validated');
+
+    console.log('Todo added successfully!');
 }
 
-submitBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  submitTask();
-});
+function ResetForm(e) {
+    e.preventDefault();
+    todoForm.reset()
+    todoForm.classList.remove('was-validated');
+    inputFormTitle.value='';
+    inputFormDesc.value='';
+}
 
-resetForm.addEventListener("click", (e) => {
-  e.preventDefault();
-  ClearForm();
-});
+todoForm.addEventListener('submit',submitTodoItem);
+todoForm.addEventListener('reset',ResetForm);
