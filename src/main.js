@@ -11,6 +11,10 @@ const todoList = document.getElementById('todoList');
 const deleteTodoBtn = document.getElementById('deleteTodoBtn');
 const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
 const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+const cancelEditBtn= document.getElementById('cancelEditBtn');
+  
+const Year = document.getElementById('year');
+
 
 let todoItemList = JSON.parse(localStorage.getItem('Todos'))||[];
 let editingTodoId=null;
@@ -55,6 +59,8 @@ function submitTodoItem(e) {
   }
     SaveData(todoItemList);
     todoForm.querySelector('button[type="submit"]').textContent = 'Add Todo';
+    todoForm.querySelector('button[type="button"]').classList.add('d-none');
+  todoForm.querySelector('button[type="reset"]').classList.remove('d-none');
 
     todoForm.reset();
     todoForm.classList.remove('was-validated');
@@ -174,11 +180,12 @@ function CreateListItem(data) {
   editBtn.dataset.id = id;
   if (editBtn) {
     editBtn.addEventListener('click',(e)=>{
-      const id = Number(e.target.dataset.id);
+      const id = Number(e.currentTarget.dataset.id);
       LoadTodoForEdit(id);
     })
   }
 
+  // edit
   function LoadTodoForEdit(id) {
   const todo = todoItemList.find(t => t.id === id);
   if (!todo) return;
@@ -188,7 +195,20 @@ function CreateListItem(data) {
 
   editingTodoId = id;
   todoForm.querySelector('button[type="submit"]').textContent = 'Save Todo';
+  todoForm.querySelector('button[type="reset"]').classList.add('d-none');
+  todoForm.querySelector('button[type="button"]').classList.remove('d-none');
   
+}
+
+cancelEditBtn.addEventListener('click', CancelEdit);
+
+function CancelEdit() {
+  editingTodoId = null;
+  todoForm.reset();
+  todoForm.classList.remove('was-validated');
+  todoForm.querySelector('button[type="submit"]').textContent = 'Add Todo';
+  todoForm.querySelector('button[type="button"]').classList.add('d-none');
+  todoForm.querySelector('button[type="reset"]').classList.remove('d-none');
 }
 
 
@@ -275,6 +295,7 @@ function DisplayTodoItems() {
 
 window.addEventListener('DOMContentLoaded',()=>{
     DisplayTodoItems();
+    Year.textContent = new Date().getFullYear();
 })
 
 todoForm.addEventListener('submit',submitTodoItem);
